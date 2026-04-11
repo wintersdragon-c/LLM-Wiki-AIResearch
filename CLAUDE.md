@@ -6,7 +6,7 @@ This file provides guidance to Claude Code when working in this repository.
 
 This repository is an LLM-maintained research wiki. There is no build system or test runner; the repository itself is the artifact.
 
-Read `AGENTS.md` before any ingest, query, or lint operation. Read `LLM-wiki.md`, `docs/superpowers/specs/2026-04-10-research-wiki-design.md`, and `research-map.md` before structural edits.
+Read `AGENTS.md` before any ingest, query, or lint operation. Read `LLM-wiki.md` for the pointer to the original Karpathy gist, then read `docs/superpowers/specs/2026-04-10-research-wiki-design.md` and `research-map.md` before structural edits.
 
 ## Architecture
 

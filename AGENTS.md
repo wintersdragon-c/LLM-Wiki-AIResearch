@@ -4,7 +4,7 @@
 
 This repository is an LLM-maintained research wiki for computer science work. The repository is a persistent, compounding markdown knowledge base rather than an application codebase.
 
-Read `LLM-wiki.md`, `docs/superpowers/specs/2026-04-10-research-wiki-design.md`, and `research-map.md` before making structural edits.
+Read `LLM-wiki.md` for the pointer to the original Karpathy gist, then read `docs/superpowers/specs/2026-04-10-research-wiki-design.md` and `research-map.md` before making structural edits.
 
 ## Architecture
 
