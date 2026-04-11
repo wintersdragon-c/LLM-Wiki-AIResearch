@@ -150,3 +150,8 @@ Append operation summaries to `log.md` using:
 Where `<operation>` is one of: `ingest`, `query`, `lint`, `bootstrap`.
 
 Put detailed audit trails in `logs/`.
+
+## Operational Helpers
+
+- `reviews/ingest-checklist.md` is the canonical ingest checklist.
+- `logs/lint-template.md` is the starting point for lint reports.
