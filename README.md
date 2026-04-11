@@ -46,9 +46,12 @@ The wiki already uses `[[WikiLink]]` and structured YAML frontmatter, so Obsidia
 1. Read [AGENTS.md](./AGENTS.md).
 2. Read [research-map.md](./research-map.md) and [index.md](./index.md).
 3. Create a folder under `sources/` and drop your materials there.
-4. Optionally add a short `notes.md` describing why the material matters or what you want from the ingest.
-5. Ask your LLM agent to `ingest` that source folder using the pipeline in `AGENTS.md`.
-6. Review the new or updated pages under `papers/`, `topics/`, `ideas/`, and `assets/`.
+4. Optionally add a short `notes.md` describing why the material matters, what you want from ingest, or what idea you are exploring.
+5. Tell your LLM agent what new material you added and what you want to know, in natural language.
+6. Let the agent route the request, ingest missing coverage, and update the wiki.
+7. Review the new or updated pages under `papers/`, `topics/`, `ideas/`, `assets/`, and `reviews/`.
+
+Natural-language requests are preferred over command-style prompts. Example: `我补充了 sources/hacrl，我想看看这个训练能不能和 PDA 结合在一起。`
 
 For a concrete walkthrough, see [docs/getting-started/first-ingest.md](./docs/getting-started/first-ingest.md).
 

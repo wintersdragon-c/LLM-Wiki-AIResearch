@@ -32,11 +32,19 @@ sources/wei-2022-chain-of-thought/
 
 ## Tell The Agent What To Do
 
-Use a prompt like:
+Use a natural-language request like:
 
 ```text
-Ingest the source folder at sources/wei-2022-chain-of-thought/ using the pipeline in AGENTS.md. Read notes.md if present. Update topics, ideas, assets, index.md, and log.md as needed. Do not write compiled wiki output into sources/.
+我补充了 sources/wei-2022-chain-of-thought，我想先看看这篇论文到底做对了什么，以及它对现有 reasoning topic 有什么影响。
 ```
+
+The agent should infer that this means:
+
+- inspect the referenced source folder
+- read `notes.md` if present
+- run ingest first when structured coverage is missing or stale
+- continue into the requested analysis
+- write durable results back to the wiki
 
 ## Expected Output Shape
 

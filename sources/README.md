@@ -31,3 +31,15 @@ Minimal `notes.md` example:
 ```
 
 If you want a blank starting point, copy `sources/_template/notes.md`.
+
+## How To Ask The Agent
+
+You do not need to issue a command-style ingest prompt.
+
+Good natural-language requests:
+
+- `我补充了 sources/hacrl，先帮我整理这篇论文最值得学的地方。`
+- `我补充了 sources/hacrl，我想看看这个训练能不能和 PDA 结合在一起。`
+- `I added sources/hacpo. Can you see whether its reward design is reusable for my current agent idea?`
+
+The agent should inspect the referenced source folder, read `notes.md` if present, ingest missing coverage, and then continue into the research question.
