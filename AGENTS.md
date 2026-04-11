@@ -118,7 +118,7 @@ Check for contradictions, stale claims, orphan pages, missing cross-links, upgra
 
 - Use `[[WikiLink]]` syntax for all internal references.
 - Every non-guide wiki page must have YAML frontmatter with at minimum: `type`, `title`, `slug`, `tags`, `created`, `updated`.
-- Directory guide files such as `README.md` are exempt from the universal schema and may stay lightweight.
+- Schema files (`AGENTS.md`, `CLAUDE.md`), reference documents (`LLM-wiki.md`), `docs/` planning artifacts, and directory guide files (`README.md`) are exempt from the universal schema.
 - `hypothesis` pages also require `status`, `confidence`, `topic_refs`, `source_papers`.
 - `proposal` pages also require `status`, `confidence`, `positioning`, `topic_refs`, `source_papers`.
 - `paper` pages also require `paper_id`, `topic_refs`, `inspired_ideas`.
