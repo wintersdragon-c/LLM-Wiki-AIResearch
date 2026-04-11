@@ -1,0 +1,36 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code when working in this repository.
+
+## What this repository is
+
+This repository is an LLM-maintained research wiki. There is no build system or test runner; the repository itself is the artifact.
+
+Read `LLM-wiki.md`, `docs/superpowers/specs/2026-04-10-research-wiki-design.md`, `AGENTS.md`, and `research-map.md` before major edits.
+
+## Architecture
+
+Three layers:
+
+- `raw/` — immutable source materials
+- root wiki directories — maintained markdown knowledge pages
+- schema files — `AGENTS.md` and `CLAUDE.md`
+
+Key files:
+
+- `index.md` — content catalog
+- `log.md` — append-only global timeline
+- `research-map.md` — authoritative high-level research map
+
+## Operations
+
+- Ingest follows the 11-stage pipeline from the design spec.
+- Query starts from `research-map.md` and `index.md`.
+- Lint checks contradictions, stale claims, orphan pages, missing links, upgradeable ideas, and map drift.
+
+## Conventions
+
+- Use `[[WikiLink]]` for internal links.
+- Keep `raw/` immutable.
+- Maintain YAML frontmatter on every wiki page.
+- Keep logs grep-friendly with `## [YYYY-MM-DD] ...` headings.
