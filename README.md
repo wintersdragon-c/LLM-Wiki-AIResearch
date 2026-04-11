@@ -1,6 +1,10 @@
-# LLM Research Wiki
+# LLMWiki-AIresearch
 
 An LLM-maintained research wiki for computer science work, designed to be used with Obsidian and an agent that follows the repository schema in [AGENTS.md](./AGENTS.md).
+
+This project is inspired by Andrej Karpathy's `llm-wiki` pattern and adapts that core idea to AI research workflows, topic-centered literature organization, and idea generation. The original design reference is:
+
+- Andrej Karpathy, `llm-wiki`: <https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f>
 
 This repository is not an app. The repository itself is the artifact: raw source documents go into `raw/`, the LLM compiles them into markdown pages under `topics/`, `papers/`, `ideas/`, and `assets/`, and the wiki compounds over time.
 
@@ -62,6 +66,19 @@ This repository is structured so an Obsidian CLI layer can act as a semi-automat
 - the CLI writes files from templates, updates `index.md`, and routes log output
 
 The naming rules, frontmatter schema, and Action -> Template map live in [AGENTS.md](./AGENTS.md).
+
+## Attribution
+
+This repository builds on the persistent wiki pattern described in Andrej Karpathy's `llm-wiki` gist, then specializes it for:
+
+- AI research topic maps
+- hypothesis / proposal tracking
+- reusable experiment and evaluation patterns
+- Obsidian-friendly LLM maintenance workflows
+
+## License
+
+This repository is released under the [MIT License](./LICENSE).
 
 ## Status
 
