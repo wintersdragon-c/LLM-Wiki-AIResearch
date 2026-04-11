@@ -12,7 +12,7 @@ Track prompting-only approaches, supervised process traces, and reinforcement-st
 
 ## Representative Works
 
-- Add papers after ingest.
+<!-- None yet. Add [[papers/slug]] entries after ingest. -->
 
 ## Current Strongest Hypothesis
 
@@ -20,7 +20,7 @@ Structured intermediate reasoning helps when it changes search or credit assignm
 
 ## Known Counterexamples
 
-- Add failures and negative assets after ingest.
+<!-- None yet. Add after ingest when negative assets or failure modes are identified. -->
 
 ## Open Problems
 
