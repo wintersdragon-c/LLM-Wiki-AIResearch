@@ -81,6 +81,7 @@ Answer each question explicitly:
 - Update all affected pages.
 - Maintain bidirectional links between `papers/` and `ideas/`.
 - Check whether any hypothesis should be promoted to proposal.
+- Add or refresh entries in `index.md` for every new or significantly changed page.
 
 #### Log
 - Append a summary to `log.md`.
