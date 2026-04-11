@@ -11,7 +11,9 @@ updated: 2026-04-11
 - [[log]] - Append-only global timeline of ingest, query, and lint operations.
 
 ## Topics
-- Add topic pages here as they are created.
+- [[topics/llm-reasoning]] - Research on reasoning behavior, process supervision, and evaluation.
+- [[topics/agent-systems]] - Research on LLM agents, tool use, planning, and execution loops.
+- [[topics/evaluation-harness]] - Research on benchmark and protocol design for credible evaluation.
 
 ## Papers
 - Add structured paper pages here as they are ingested.

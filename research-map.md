@@ -7,16 +7,18 @@ updated: 2026-04-11
 # Research Map
 
 ## Foundational Layer
-- To be populated as core topics are established.
+- [[topics/llm-reasoning]] - Core reasoning and problem-solving behavior in LLMs.
 
 ## Applied Layer
-- To be populated as project-facing topics emerge.
+- [[topics/agent-systems]] - Tool-using and multi-step LLM systems built on reasoning policies.
 
 ## Bridging Layer
-- To be populated with topics that connect methods to applications.
+- [[topics/evaluation-harness]] - Evaluation infrastructure that connects reasoning and agents to credible measurement.
 
 ## Current Frontier
 - To be updated as the wiki accumulates papers and ideas.
 
 ## Relationship Notes
-- Add explicit statements about topic dependencies and overlap here.
+- [[topics/llm-reasoning]] provides capability primitives that many [[topics/agent-systems]] systems depend on.
+- [[topics/evaluation-harness]] measures both reasoning behavior and agent execution quality.
+- Improvements in [[topics/agent-systems]] are difficult to trust without stronger [[topics/evaluation-harness]] design.
