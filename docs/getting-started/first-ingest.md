@@ -4,7 +4,7 @@ This walkthrough shows the smallest useful end-to-end cycle for adding the first
 
 ## Goal
 
-Take one paper from `raw/papers/` and compile it into:
+Take one source folder from `sources/` and compile it into:
 
 - one `papers/*.md` page
 - updates to one or more `topics/*.md` pages
@@ -15,14 +15,17 @@ Take one paper from `raw/papers/` and compile it into:
 
 ## Before You Start
 
-1. Put a single paper into `raw/papers/`.
-2. Make sure its filename is stable and readable, for example:
+1. Create one source folder under `sources/`.
+2. Put the paper and any supporting material there. Add `notes.md` if you want to guide the ingest.
+3. Keep the folder name stable and readable, for example:
 
 ```text
-raw/papers/wei-2022-chain-of-thought.pdf
+sources/wei-2022-chain-of-thought/
+  notes.md
+  wei-2022-chain-of-thought.pdf
 ```
 
-3. Read:
+4. Read:
    - [AGENTS.md](../../AGENTS.md)
    - [research-map.md](../../research-map.md)
    - [index.md](../../index.md)
@@ -32,7 +35,7 @@ raw/papers/wei-2022-chain-of-thought.pdf
 Use a prompt like:
 
 ```text
-Ingest the paper at raw/papers/wei-2022-chain-of-thought.pdf using the pipeline in AGENTS.md. Update topics, ideas, assets, index.md, and log.md as needed. Keep raw/ immutable.
+Ingest the source folder at sources/wei-2022-chain-of-thought/ using the pipeline in AGENTS.md. Read notes.md if present. Update topics, ideas, assets, index.md, and log.md as needed. Do not write compiled wiki output into sources/.
 ```
 
 ## Expected Output Shape
@@ -81,7 +84,7 @@ Check these five things:
 2. `topic_refs`, `source_papers`, and `inspired_ideas` are internally consistent.
 3. `index.md` contains the new or updated pages in the right section.
 4. `log.md` records the ingest once, with a useful title.
-5. No file under `raw/` was modified.
+5. No compiled wiki page was written into `sources/`; only the canonical wiki directories were updated.
 
 ## Good First Questions To Ask After Ingest
 
@@ -93,4 +96,4 @@ Check these five things:
 
 ## After The First Paper
 
-Once one paper goes through cleanly, repeat with a second paper in the same topic. The first real value appears when the wiki starts linking papers through shared topics, assets, and ideas rather than storing them as isolated notes.
+Once one source folder goes through cleanly, repeat with a second source in the same topic. The first real value appears when the wiki starts linking papers through shared topics, assets, and ideas rather than storing them as isolated notes.

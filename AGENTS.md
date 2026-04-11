@@ -10,7 +10,7 @@ Read `LLM-wiki.md` for the pointer to the original Karpathy gist, then read `doc
 
 Three layers:
 
-- `raw/` contains immutable source materials. Never edit files in `raw/`.
+- `sources/` contains user-owned source folders. Read from it during ingest; do not treat it as compiled wiki output.
 - Root-level wiki directories (`topics/`, `papers/`, `ideas/`, `assets/`, `reviews/`, `logs/`) contain LLM-maintained markdown pages.
 - Schema files (`AGENTS.md`, `CLAUDE.md`) define workflows and conventions.
 
@@ -41,6 +41,14 @@ All file names must be kebab-case slugs. No spaces, no uppercase, no underscores
 The `paper_id` field in paper frontmatter must match the file slug exactly (without `.md`).
 
 ## Core Operations
+
+### Source Intake
+Use `sources/<slug>/` as the intake unit.
+
+- A source folder may contain any mix of files: `paper.pdf`, `notes.md`, `repo/`, `figures/`, copied markdown, screenshots, or other supporting artifacts.
+- `notes.md` is recommended but optional. Treat it as the user's intent layer: why the material matters, what to extract, what to critique, and any early ideas.
+- Never require the user to pre-fill multiple metadata files before ingest.
+- Do not create compiled wiki pages inside `sources/`.
 
 ### Ingest
 Run the approved pipeline in order:
@@ -213,6 +221,7 @@ source_papers: ["[[papers/slug]]", ...]
 
 ## Directory Guide
 
+- `sources/`: low-friction source folders owned by the user; recommended input entrypoint
 - `topics/`: topic map pages and survey subpages
 - `papers/`: one structured page per paper
 - `ideas/hypothesis/`: fast-capture idea cards
@@ -253,6 +262,7 @@ Write to `logs/` only (no `log.md` entry) for:
 
 | Action | Template | Required frontmatter fields |
 |--------|----------|-----------------------------|
+| `source-folder-init` | `sources/_template/notes.md` | — |
 | `new-topic` | `topics/_template.md` | `title`, `slug`, `subtopics`, `open_questions`, `papers`, `ideas` |
 | `new-topic-survey` | `topics/_survey-template.md` | `title`, `slug`, `tags`, `created`, `updated` |
 | `new-paper` | `papers/_template.md` | `paper_id`, `title`, `slug`, `topic_refs` |

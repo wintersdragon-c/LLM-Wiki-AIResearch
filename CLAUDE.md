@@ -12,7 +12,7 @@ Read `AGENTS.md` before any ingest, query, or lint operation. Read `LLM-wiki.md`
 
 Three layers:
 
-- `raw/` — immutable source materials
+- `sources/` — user-owned source folders for ingest input
 - root wiki directories — maintained markdown knowledge pages
 - schema files — `AGENTS.md` and `CLAUDE.md`
 
@@ -31,6 +31,6 @@ Key files:
 ## Conventions
 
 - Use `[[WikiLink]]` for internal links.
-- Keep `raw/` immutable.
+- Treat `sources/` as intake space, not compiled wiki output.
 - Maintain YAML frontmatter on every wiki page.
 - Keep logs grep-friendly with `## [YYYY-MM-DD] ...` headings.

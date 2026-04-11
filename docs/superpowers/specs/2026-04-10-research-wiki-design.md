@@ -18,10 +18,10 @@ This is not a reading log. It is a compiled artifact that gets richer with every
 
 Directly inherits from LLM-wiki.md:
 
-- **`raw/`** — Immutable source documents. LLM reads, never modifies.
-  - `raw/papers/` — PDF or markdown of source papers
-  - `raw/notes/` — Meeting notes, talk notes, personal observations
-  - `raw/assets/` — Images, figures, data files referenced by papers
+- **`sources/`** — User-owned source folders. The user drops materials here with minimal structure; the LLM reads from them and compiles the wiki elsewhere.
+  - `sources/<slug>/paper.pdf` — PDF or markdown of a source paper
+  - `sources/<slug>/notes.md` — Optional short intent note from the user
+  - `sources/<slug>/repo/`, `figures/`, `data/`, or arbitrary files — Supporting material when useful
 
 - **Wiki layer** — LLM-owned markdown files. The persistent compiled artifact.
 
@@ -32,10 +32,13 @@ Directly inherits from LLM-wiki.md:
 ## 3. Directory Structure
 
 ```
-raw/
-  papers/
-  notes/
-  assets/
+sources/
+  <source-slug>/
+    notes.md
+    paper.pdf
+    repo/
+    figures/
+    ...
 
 topics/                        # Research space navigation
   <topic-name>.md              # Topic map pages
@@ -92,10 +95,10 @@ This is the first file LLM reads in the Map stage. It must NOT become a link dum
 
 ## 5. Compilation Pipeline
 
-Each paper ingestion runs through these 11 stages in order:
+Each source-folder ingestion runs through these 11 stages in order:
 
 ### Stage 1: Parse
-Structured extraction of paper content: title, authors, venue, year, problem statement, proposed method, key results, limitations stated by authors.
+Read the source folder, identify the primary paper or artifact set, and extract title, authors, venue, year, problem statement, proposed method, key results, and author-stated limitations. If `notes.md` exists, treat it as guidance rather than ground truth.
 
 ### Stage 2: Appreciate
 Extract what the paper genuinely does well — independent of the authors' own framing:

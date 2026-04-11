@@ -6,7 +6,7 @@ This project is inspired by Andrej Karpathy's `llm-wiki` pattern and adapts that
 
 - Andrej Karpathy, `llm-wiki`: <https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f>
 
-This repository is not an app. The repository itself is the artifact: raw source documents go into `raw/`, the LLM compiles them into markdown pages under `topics/`, `papers/`, `ideas/`, and `assets/`, and the wiki compounds over time.
+This repository is not an app. The repository itself is the artifact: source materials go into `sources/`, the LLM compiles them into markdown pages under `topics/`, `papers/`, `ideas/`, and `assets/`, and the wiki compounds over time.
 
 ## What This Is For
 
@@ -18,7 +18,7 @@ This repository is not an app. The repository itself is the artifact: raw source
 ## Repository Layout
 
 ```text
-raw/                      Immutable inputs: papers, notes, images
+sources/                  Low-friction input folders; user drops materials here
 topics/                   Topic map pages and survey subpages
 papers/                   One structured page per paper
 ideas/hypothesis/         Fast-capture idea cards
@@ -45,16 +45,17 @@ The wiki already uses `[[WikiLink]]` and structured YAML frontmatter, so Obsidia
 
 1. Read [AGENTS.md](./AGENTS.md).
 2. Read [research-map.md](./research-map.md) and [index.md](./index.md).
-3. Drop a paper PDF or markdown export into `raw/papers/`.
-4. Ask your LLM agent to `ingest` that paper using the pipeline in `AGENTS.md`.
-5. Review the new or updated pages under `papers/`, `topics/`, `ideas/`, and `assets/`.
+3. Create a folder under `sources/` and drop your materials there.
+4. Optionally add a short `notes.md` describing why the material matters or what you want from the ingest.
+5. Ask your LLM agent to `ingest` that source folder using the pipeline in `AGENTS.md`.
+6. Review the new or updated pages under `papers/`, `topics/`, `ideas/`, and `assets/`.
 
 For a concrete walkthrough, see [docs/getting-started/first-ingest.md](./docs/getting-started/first-ingest.md).
 
 ## Recommended Workflow
 
-- Use one source at a time at first.
-- Keep `raw/` immutable.
+- Use one source folder at a time at first.
+- Treat `sources/` as user-owned input space: drop in materials freely, let the LLM read from it, and avoid hand-maintaining structured output there.
 - Let the agent update `index.md`, `log.md`, and bidirectional links during each ingest.
 - Run periodic lint passes to catch stale claims, orphan pages, and upgradeable ideas.
 

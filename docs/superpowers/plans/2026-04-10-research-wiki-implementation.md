@@ -4,7 +4,7 @@
 
 **Goal:** Turn the approved research-wiki spec into a working Obsidian-friendly repository skeleton with aligned schema files, seed pages, page templates, and a verified first-pass ingest workflow.
 
-**Architecture:** Keep the repository as a markdown-first system. Implement the three-layer structure from the spec: immutable `raw/`, compiled wiki pages at the repo root, and schema/control files (`AGENTS.md`, `CLAUDE.md`, spec, plan). Use Obsidian-native primitives only: directories, `[[WikiLink]]`, YAML frontmatter, and grep-friendly log formats.
+**Architecture:** Keep the repository as a markdown-first system. Implement the three-layer structure from the spec: low-friction `sources/`, compiled wiki pages at the repo root, and schema/control files (`AGENTS.md`, `CLAUDE.md`, spec, plan). Use Obsidian-native primitives only: directories, `[[WikiLink]]`, YAML frontmatter, and grep-friendly log formats.
 
 **Tech Stack:** Markdown, YAML frontmatter, Obsidian WikiLinks/backlinks, zsh shell utilities (`mkdir`, `test`, `find`, `rg`, `sed`)
 
@@ -42,7 +42,7 @@ Read `LLM-wiki.md`, `docs/superpowers/specs/2026-04-10-research-wiki-design.md`,
 
 Three layers:
 
-- `raw/` contains immutable source materials. Never edit files in `raw/`.
+- `sources/` contains user-owned source folders. Read from it during ingest; do not treat it as compiled wiki output.
 - Root-level wiki directories (`topics/`, `papers/`, `ideas/`, `assets/`, `reviews/`, `logs/`) contain LLM-maintained markdown pages.
 - Schema files (`AGENTS.md`, `CLAUDE.md`) define workflows and conventions.
 
@@ -192,7 +192,7 @@ Read `LLM-wiki.md`, `docs/superpowers/specs/2026-04-10-research-wiki-design.md`,
 
 Three layers:
 
-- `raw/` — immutable source materials
+- `sources/` — user-owned source folders for ingest input
 - root wiki directories — maintained markdown knowledge pages
 - schema files — `AGENTS.md` and `CLAUDE.md`
 
@@ -211,14 +211,14 @@ Key files:
 ## Conventions
 
 - Use `[[WikiLink]]` for internal links.
-- Keep `raw/` immutable.
+- Treat `sources/` as intake space, not compiled wiki output.
 - Maintain YAML frontmatter on every wiki page.
 - Keep logs grep-friendly with `## [YYYY-MM-DD] ...` headings.
 ```
 
 - [ ] **Step 6: Confirm both schema files point at the same repository model**
 
-Run: `rg -n "raw/|research-map.md|ideas/hypothesis|ideas/proposals|assets/negative-assets" /Users/chendongyao/Desktop/LLM-WIKI/AGENTS.md /Users/chendongyao/Desktop/LLM-WIKI/CLAUDE.md`
+Run: `rg -n "sources/|research-map.md|ideas/hypothesis|ideas/proposals|assets/negative-assets" /Users/chendongyao/Desktop/LLM-WIKI/AGENTS.md /Users/chendongyao/Desktop/LLM-WIKI/CLAUDE.md`
 Expected: both files contain the new root-level structure and no `wiki/` references remain.
 
 - [ ] **Step 7: Commit the schema alignment**
@@ -231,10 +231,8 @@ git commit -m "docs: align repository schema with research wiki spec"
 ### Task 2: Scaffold The Repository Structure And Seed Global Navigation Files
 
 **Files:**
-- Create: `/Users/chendongyao/Desktop/LLM-WIKI/raw/`
-- Create: `/Users/chendongyao/Desktop/LLM-WIKI/raw/papers/.gitkeep`
-- Create: `/Users/chendongyao/Desktop/LLM-WIKI/raw/notes/.gitkeep`
-- Create: `/Users/chendongyao/Desktop/LLM-WIKI/raw/assets/.gitkeep`
+- Create: `/Users/chendongyao/Desktop/LLM-WIKI/sources/README.md`
+- Create: `/Users/chendongyao/Desktop/LLM-WIKI/sources/_template/notes.md`
 - Create: `/Users/chendongyao/Desktop/LLM-WIKI/topics/README.md`
 - Create: `/Users/chendongyao/Desktop/LLM-WIKI/papers/README.md`
 - Create: `/Users/chendongyao/Desktop/LLM-WIKI/ideas/hypothesis/README.md`
@@ -255,9 +253,7 @@ git commit -m "docs: align repository schema with research wiki spec"
 Run:
 
 ```bash
-mkdir -p /Users/chendongyao/Desktop/LLM-WIKI/raw/papers
-mkdir -p /Users/chendongyao/Desktop/LLM-WIKI/raw/notes
-mkdir -p /Users/chendongyao/Desktop/LLM-WIKI/raw/assets
+mkdir -p /Users/chendongyao/Desktop/LLM-WIKI/sources/_template
 mkdir -p /Users/chendongyao/Desktop/LLM-WIKI/topics
 mkdir -p /Users/chendongyao/Desktop/LLM-WIKI/papers
 mkdir -p /Users/chendongyao/Desktop/LLM-WIKI/ideas/hypothesis
