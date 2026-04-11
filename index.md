@@ -16,11 +16,11 @@ updated: 2026-04-11
 - [[topics/evaluation-harness]] - Research on benchmark and protocol design for credible evaluation.
 
 ## Papers
-- [[papers/example-paper]] - Synthetic page used to validate wiki structure and links.
+- Add structured paper pages here as they are ingested.
 
 ## Ideas
 ### Hypothesis
-- [[ideas/hypothesis/h-example-idea]] - Synthetic hypothesis linked to the example paper.
+- Add hypothesis cards here as they are created.
 
 ### Proposals
 - Add mature proposals here as they are promoted.
