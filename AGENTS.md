@@ -50,6 +50,18 @@ Use `sources/<slug>/` as the intake unit.
 - Never require the user to pre-fill multiple metadata files before ingest.
 - Do not create compiled wiki pages inside `sources/`.
 
+### Intent Routing
+Interpret user requests by research intent, not only by explicit workflow verbs.
+
+- If a user mentions one or more `sources/...` folders and also asks an analytic question, first check whether those sources already have adequate structured coverage in `papers/`, `topics/`, `ideas/`, and `assets/`.
+- If coverage is missing or stale, run full ingest without pausing for a separate confirmation step, then continue into the requested analysis.
+- Read `notes.md` inside a referenced source folder when present. Treat it as an explicit intent layer that may refine or override the chat-message signal.
+- Use semantic routing rather than exact-string matching. Route from path mentions, surrounding verbs, and current repository state together.
+- Support both Chinese and English trigger language when mapping requests to routes.
+- Reuse existing structured pages when coverage is already sufficient; avoid redundant ingest.
+- Ask a clarifying question only when the referenced path does not exist, multiple candidate targets conflict materially, or the requested analysis target is too ambiguous to resolve from repository context.
+- Use `docs/workflows/router.md` as the concrete route map for intent families and default action sequences.
+
 ### Ingest
 Run the approved pipeline in order:
 `Parse -> Appreciate -> Map -> Positioning -> Diff -> Abstract -> Critique -> Mutate -> Compose -> Update -> Log`
@@ -117,7 +129,9 @@ Answer each question explicitly:
 - Write detailed audit records to `logs/` when the session is substantial.
 
 ### Query
+Route natural-language research requests using `docs/workflows/router.md`.
 Read `research-map.md` and `index.md` first, then relevant topic, paper, idea, and asset pages. File valuable outputs back into the wiki.
+If the request references new `sources/...` material, perform the coverage check and ingest-first behavior from `Intent Routing` before answering.
 
 ### Lint
 Check for contradictions, stale claims, orphan pages, missing cross-links, upgradeable hypotheses, stale `under-review` ideas, and `research-map.md` drift.
@@ -279,3 +293,4 @@ Write to `logs/` only (no `log.md` entry) for:
 
 - `reviews/ingest-checklist.md` is the canonical ingest checklist.
 - `logs/lint-template.md` is the starting point for lint reports.
+- `docs/workflows/router.md` is the concrete semantic route map for natural-language user requests.
