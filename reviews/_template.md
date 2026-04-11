@@ -1,6 +1,9 @@
 ---
 type: review
+title: "Review Title"
+slug: review-slug
 tags: [review]
+created: YYYY-MM-DD
 updated: YYYY-MM-DD
 topics: []
 papers: []

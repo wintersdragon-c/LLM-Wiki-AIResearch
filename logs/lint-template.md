@@ -1,6 +1,9 @@
 ---
 type: lint-report
+title: "Lint Report"
+slug: lint-report
 tags: [lint]
+created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---
 

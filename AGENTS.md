@@ -117,7 +117,8 @@ Check for contradictions, stale claims, orphan pages, missing cross-links, upgra
 ## Page Conventions
 
 - Use `[[WikiLink]]` syntax for all internal references.
-- Every page must have YAML frontmatter with at minimum: `type`, `title`, `slug`, `tags`, `created`, `updated`.
+- Every non-guide wiki page must have YAML frontmatter with at minimum: `type`, `title`, `slug`, `tags`, `created`, `updated`.
+- Directory guide files such as `README.md` are exempt from the universal schema and may stay lightweight.
 - `hypothesis` pages also require `status`, `confidence`, `topic_refs`, `source_papers`.
 - `proposal` pages also require `status`, `confidence`, `positioning`, `topic_refs`, `source_papers`.
 - `paper` pages also require `paper_id`, `topic_refs`, `inspired_ideas`.
@@ -196,7 +197,8 @@ source_papers: ["[[papers/slug]]", ...]
 ## Bidirectional Tracking
 
 - Each relevant `papers/*.md` page maintains `inspired_ideas:`.
-- Each idea page maintains `sources:` with anchor-level provenance when possible.
+- Each idea page maintains `source_papers:` in frontmatter for page-level provenance.
+- If finer provenance matters, record section- or anchor-level evidence in the body under a source section such as `## Source Mechanisms`.
 - Keep both directions consistent during every `Update`.
 
 ## Topic Pages
@@ -251,6 +253,8 @@ Write to `logs/` only (no `log.md` entry) for:
 
 | Action | Template | Required frontmatter fields |
 |--------|----------|-----------------------------|
+| `new-topic` | `topics/_template.md` | `title`, `slug`, `subtopics`, `open_questions`, `papers`, `ideas` |
+| `new-topic-survey` | `topics/_survey-template.md` | `title`, `slug`, `tags`, `created`, `updated` |
 | `new-paper` | `papers/_template.md` | `paper_id`, `title`, `slug`, `topic_refs` |
 | `new-hypothesis` | `ideas/hypothesis/_template.md` | `title`, `slug`, `status`, `confidence`, `topic_refs`, `source_papers` |
 | `promote-proposal` | `ideas/proposals/_template.md` | `title`, `slug`, `status`, `confidence`, `positioning`, `topic_refs`, `source_papers` |

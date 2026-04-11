@@ -1,6 +1,9 @@
 ---
 type: topic-survey
+title: "Survey Title"
+slug: survey-slug
 tags: [topic, survey]
+created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---
 

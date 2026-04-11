@@ -1,6 +1,9 @@
 ---
 type: research-map
+title: "Research Map"
+slug: research-map
 tags: [research-map]
+created: 2026-04-11
 updated: 2026-04-11
 ---
 

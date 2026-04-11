@@ -1,6 +1,9 @@
 ---
 type: checklist
+title: "Ingest Checklist"
+slug: ingest-checklist
 tags: [workflow, ingest]
+created: 2026-04-11
 updated: 2026-04-11
 ---
 

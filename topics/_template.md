@@ -1,10 +1,13 @@
 ---
 type: topic
+title: "Topic Name"
+slug: topic-slug
 tags: [topic]
 subtopics: []
 open_questions: []
 papers: []
 ideas: []
+created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---
 
