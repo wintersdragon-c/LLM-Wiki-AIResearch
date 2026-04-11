@@ -1,11 +1,14 @@
 ---
 type: topic
+title: "LLM Reasoning"
+slug: llm-reasoning
 tags: [topic, llm-reasoning]
 subtopics: ["[[topics/llm-reasoning/chain-of-thought]]"]
 open_questions:
   - "When does explicit reasoning scaffolding help versus hurt?"
 papers: []
 ideas: []
+created: 2026-04-11
 updated: 2026-04-11
 ---
 

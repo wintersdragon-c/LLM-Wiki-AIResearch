@@ -1,8 +1,12 @@
 ---
 type: failure-mode
+title: "Failure Mode Name"
+slug: failure-mode-slug
+asset_kind: failure-mode
 tags: [asset, failure-mode]
-updated: YYYY-MM-DD
 source_papers: []
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
 ---
 
 # Failure Mode Name

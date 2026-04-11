@@ -1,6 +1,9 @@
 ---
 type: topic-survey
+title: "Chain of Thought"
+slug: chain-of-thought
 tags: [topic, survey, chain-of-thought]
+created: 2026-04-11
 updated: 2026-04-11
 ---
 

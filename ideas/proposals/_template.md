@@ -1,9 +1,13 @@
 ---
 type: proposal
+title: "Proposal Title"
+slug: p-slug
 status: proposal
-tags: [idea, proposal]
-sources: []
+confidence: medium
 positioning: fills-gap
+tags: [idea, proposal]
+topic_refs: []
+source_papers: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---

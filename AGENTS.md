@@ -19,6 +19,27 @@ Root-level special files:
 - `log.md` — append-only global timeline; append after every operation
 - `research-map.md` — authoritative research space map; read before every Map stage
 
+## File Naming
+
+All file names must be kebab-case slugs. No spaces, no uppercase, no underscores.
+
+| Directory | Pattern | Example |
+|-----------|---------|---------|
+| `topics/` | `<slug>.md` | `llm-reasoning.md` |
+| `topics/<slug>/` | `<subtopic-slug>.md` | `chain-of-thought.md` |
+| `papers/` | `<firstauthor>-<year>-<keyword>.md` | `wei-2022-chain-of-thought.md` |
+| `ideas/hypothesis/` | `h-<slug>.md` | `h-process-reward-scaling.md` |
+| `ideas/proposals/` | `p-<slug>.md` | `p-process-reward-scaling.md` |
+| `assets/mechanisms/` | `<slug>.md` | `chain-of-thought-prompting.md` |
+| `assets/experiment-patterns/` | `<slug>.md` | `step-level-reward-ablation.md` |
+| `assets/evaluation-patterns/` | `<slug>.md` | `process-vs-outcome-eval.md` |
+| `assets/failure-modes/` | `<slug>.md` | `reward-hacking-on-format.md` |
+| `assets/negative-assets/` | `<slug>.md` | `outcome-only-supervision.md` |
+| `reviews/` | `<slug>.md` | `process-supervision-survey.md` |
+| `logs/` | `<YYYY-MM-DD>-<slug>.md` | `2026-04-11-ingest-audit.md` |
+
+The `paper_id` field in paper frontmatter must match the file slug exactly (without `.md`).
+
 ## Core Operations
 
 ### Ingest
@@ -96,10 +117,67 @@ Check for contradictions, stale claims, orphan pages, missing cross-links, upgra
 ## Page Conventions
 
 - Use `[[WikiLink]]` syntax for all internal references.
-- Every page must have YAML frontmatter with `type`, `tags`, and `updated`.
-- `hypothesis` pages also require `status`, `confidence`, `sources`, and `created`.
-- `proposal` pages also require `status`, `sources`, `positioning`, `created`, and `updated`.
-- `paper` pages should maintain `inspired_ideas` when relevant.
+- Every page must have YAML frontmatter with at minimum: `type`, `title`, `slug`, `tags`, `created`, `updated`.
+- `hypothesis` pages also require `status`, `confidence`, `topic_refs`, `source_papers`.
+- `proposal` pages also require `status`, `confidence`, `positioning`, `topic_refs`, `source_papers`.
+- `paper` pages also require `paper_id`, `topic_refs`, `inspired_ideas`.
+- `asset` pages also require `asset_kind`, `source_papers`.
+
+## Frontmatter Schema
+
+### Universal (all pages)
+
+```yaml
+type: <page-type>
+title: "Human-readable title"
+slug: <file-slug-without-extension>
+tags: [<tag>, ...]
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+```
+
+### paper
+
+```yaml
+paper_id: <firstauthor>-<year>-<keyword>   # must match file slug
+topic_refs: ["[[topics/slug]]", ...]
+inspired_ideas: []
+```
+
+### hypothesis
+
+```yaml
+status: hypothesis                          # or under-review
+confidence: low                             # low | medium | high
+topic_refs: ["[[topics/slug]]", ...]
+source_papers: ["[[papers/slug]]", ...]
+```
+
+### proposal
+
+```yaml
+status: proposal                            # or under-review
+confidence: medium                          # low | medium | high
+positioning: fills-gap                      # opens-direction | fills-gap | overturns-assumption | engineering-reinforcement
+topic_refs: ["[[topics/slug]]", ...]
+source_papers: ["[[papers/slug]]", ...]
+```
+
+### topic / topic-survey
+
+```yaml
+subtopics: ["[[topics/slug/subtopic]]", ...]
+papers: []
+ideas: []
+open_questions: []
+```
+
+### asset (mechanism, experiment-pattern, evaluation-pattern, failure-mode, negative-asset)
+
+```yaml
+asset_kind: mechanism                       # matches type value
+source_papers: ["[[papers/slug]]", ...]
+```
 
 ## Idea Lifecycle
 
@@ -147,9 +225,41 @@ Append operation summaries to `log.md` using:
 
 `## [YYYY-MM-DD] <operation> | <title or summary>`
 
-Where `<operation>` is one of: `ingest`, `query`, `lint`, `bootstrap`.
+Where `<operation>` is one of: `ingest`, `query`, `lint`, `bootstrap`, `dry-run`.
 
 Put detailed audit trails in `logs/`.
+
+### Log Routing
+
+Write to `log.md` (global timeline) for:
+- Every `ingest`
+- Every `query` that writes new pages back to the wiki
+- Every `lint`
+- Every `proposal` promotion
+
+Write to `logs/` only (no `log.md` entry) for:
+- Intermediate checks and temporary audits
+- Batch link-repair details
+- Any operation that does not change wiki content
+
+`dry-run` operations must use the `dry-run` operation type in `log.md` to distinguish test runs from real ingests:
+```
+## [YYYY-MM-DD] dry-run | <title>
+```
+
+## Action → Template Map
+
+| Action | Template | Required frontmatter fields |
+|--------|----------|-----------------------------|
+| `new-paper` | `papers/_template.md` | `paper_id`, `title`, `slug`, `topic_refs` |
+| `new-hypothesis` | `ideas/hypothesis/_template.md` | `title`, `slug`, `status`, `confidence`, `topic_refs`, `source_papers` |
+| `promote-proposal` | `ideas/proposals/_template.md` | `title`, `slug`, `status`, `confidence`, `positioning`, `topic_refs`, `source_papers` |
+| `new-mechanism` | `assets/mechanisms/_template.md` | `title`, `slug`, `asset_kind`, `source_papers` |
+| `new-experiment-pattern` | `assets/experiment-patterns/_template.md` | `title`, `slug`, `asset_kind`, `source_papers` |
+| `new-evaluation-pattern` | `assets/evaluation-patterns/_template.md` | `title`, `slug`, `asset_kind`, `source_papers` |
+| `new-failure-mode` | `assets/failure-modes/_template.md` | `title`, `slug`, `asset_kind`, `source_papers` |
+| `new-negative-asset` | `assets/negative-assets/_template.md` | `title`, `slug`, `asset_kind`, `source_papers` |
+| `new-lint-report` | `logs/lint-template.md` | — |
 
 ## Operational Helpers
 

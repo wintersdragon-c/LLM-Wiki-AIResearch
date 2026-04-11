@@ -7,39 +7,39 @@ updated: 2026-04-11
 # Index
 
 ## Global Files
-- [[research-map]] - High-level research map across all active topics.
-- [[log]] - Append-only global timeline of ingest, query, and lint operations.
+- [[research-map]] | research-map | High-level research map across all active topics.
+- [[log]] | log | Append-only global timeline of ingest, query, and lint operations.
 
 ## Topics
-- [[topics/llm-reasoning]] - Research on reasoning behavior, process supervision, and evaluation.
-- [[topics/agent-systems]] - Research on LLM agents, tool use, planning, and execution loops.
-- [[topics/evaluation-harness]] - Research on benchmark and protocol design for credible evaluation.
+- [[topics/llm-reasoning]] | topic | Reasoning behavior, process supervision, evaluation.
+- [[topics/agent-systems]] | topic | LLM agents, tool use, planning, execution loops.
+- [[topics/evaluation-harness]] | topic | Benchmark and protocol design for credible evaluation.
 
 ## Papers
-- Add structured paper pages here as they are ingested.
+<!-- - [[papers/slug]] | paper | Title -->
 
 ## Ideas
 ### Hypothesis
-- Add hypothesis cards here as they are created.
+<!-- - [[ideas/hypothesis/h-slug]] | hypothesis | One-sentence question -->
 
 ### Proposals
-- Add mature proposals here as they are promoted.
+<!-- - [[ideas/proposals/p-slug]] | proposal | One-sentence description -->
 
 ## Assets
 ### Mechanisms
-- Add reusable mechanisms here.
+<!-- - [[assets/mechanisms/slug]] | mechanism | One-line description -->
 
 ### Experiment Patterns
-- Add reusable experiment patterns here.
+<!-- - [[assets/experiment-patterns/slug]] | experiment-pattern | One-line description -->
 
 ### Evaluation Patterns
-- Add reusable evaluation patterns here.
+<!-- - [[assets/evaluation-patterns/slug]] | evaluation-pattern | One-line description -->
 
 ### Failure Modes
-- Add failure mode pages here.
+<!-- - [[assets/failure-modes/slug]] | failure-mode | One-line description -->
 
 ### Negative Assets
-- Add trap-pattern pages here.
+<!-- - [[assets/negative-assets/slug]] | negative-asset | One-line description -->
 
 ## Reviews
-- Add research syntheses and deep dives here.
+<!-- - [[reviews/slug]] | review | One-line description -->

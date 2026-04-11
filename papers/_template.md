@@ -1,8 +1,13 @@
 ---
 type: paper
+title: "Paper Title"
+slug: firstauthor-year-keyword
 tags: [paper]
-updated: YYYY-MM-DD
+paper_id: firstauthor-year-keyword
+topic_refs: []
 inspired_ideas: []
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
 ---
 
 # Paper Title

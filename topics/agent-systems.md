@@ -1,11 +1,14 @@
 ---
 type: topic
+title: "Agent Systems"
+slug: agent-systems
 tags: [topic, agent-systems]
 subtopics: []
 open_questions:
   - "How should agents trade off planning depth, tool use, and execution reliability?"
 papers: []
 ideas: []
+created: 2026-04-11
 updated: 2026-04-11
 ---
 

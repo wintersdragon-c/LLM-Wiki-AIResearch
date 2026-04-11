@@ -1,9 +1,12 @@
 ---
 type: hypothesis
+title: "Hypothesis Title"
+slug: h-slug
 status: hypothesis
 confidence: low
 tags: [idea, hypothesis]
-sources: []
+topic_refs: []
+source_papers: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---

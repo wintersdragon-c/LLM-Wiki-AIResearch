@@ -1,8 +1,12 @@
 ---
 type: negative-asset
+title: "Negative Asset Name"
+slug: negative-asset-slug
+asset_kind: negative-asset
 tags: [asset, negative-asset]
-updated: YYYY-MM-DD
 source_papers: []
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
 ---
 
 # Negative Asset Name

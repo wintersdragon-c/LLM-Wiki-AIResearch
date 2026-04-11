@@ -1,11 +1,14 @@
 ---
 type: topic
+title: "Evaluation Harness"
+slug: evaluation-harness
 tags: [topic, evaluation-harness]
 subtopics: []
 open_questions:
   - "What evaluation harness best separates true capability from prompt or environment leakage?"
 papers: []
 ideas: []
+created: 2026-04-11
 updated: 2026-04-11
 ---
 
