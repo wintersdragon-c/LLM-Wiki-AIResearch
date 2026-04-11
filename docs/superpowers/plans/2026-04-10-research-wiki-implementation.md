@@ -397,7 +397,7 @@ Expected: `OK`
 - [ ] **Step 6: Commit the scaffold**
 
 ```bash
-git add /Users/chendongyao/Desktop/LLM-WIKI/raw /Users/chendongyao/Desktop/LLM-WIKI/topics /Users/chendongyao/Desktop/LLM-WIKI/papers /Users/chendongyao/Desktop/LLM-WIKI/ideas /Users/chendongyao/Desktop/LLM-WIKI/assets /Users/chendongyao/Desktop/LLM-WIKI/reviews /Users/chendongyao/Desktop/LLM-WIKI/logs /Users/chendongyao/Desktop/LLM-WIKI/index.md /Users/chendongyao/Desktop/LLM-WIKI/log.md /Users/chendongyao/Desktop/LLM-WIKI/research-map.md
+git add /Users/chendongyao/Desktop/LLM-WIKI/sources /Users/chendongyao/Desktop/LLM-WIKI/topics /Users/chendongyao/Desktop/LLM-WIKI/papers /Users/chendongyao/Desktop/LLM-WIKI/ideas /Users/chendongyao/Desktop/LLM-WIKI/assets /Users/chendongyao/Desktop/LLM-WIKI/reviews /Users/chendongyao/Desktop/LLM-WIKI/logs /Users/chendongyao/Desktop/LLM-WIKI/index.md /Users/chendongyao/Desktop/LLM-WIKI/log.md /Users/chendongyao/Desktop/LLM-WIKI/research-map.md
 git commit -m "docs: scaffold research wiki structure"
 ```
 

@@ -10,7 +10,7 @@ This repository is not an app. The repository itself is the artifact: source mat
 
 ## What This Is For
 
-- Maintaining a persistent literature and idea system instead of doing one-off RAG over raw papers
+- Maintaining a persistent literature and idea system instead of doing one-off RAG over source papers
 - Organizing research by topic, not just by paper
 - Generating and tracking hypotheses and proposals with provenance back to source papers
 - Reusing mechanisms, experiment patterns, evaluation patterns, and failure modes across papers
