@@ -14,6 +14,11 @@ Three layers:
 - Root-level wiki directories (`topics/`, `papers/`, `ideas/`, `assets/`, `reviews/`, `logs/`) contain LLM-maintained markdown pages.
 - Schema files (`AGENTS.md`, `CLAUDE.md`) define workflows and conventions.
 
+Root-level special files:
+- `index.md` — content catalog; read before every Query
+- `log.md` — append-only global timeline; append after every operation
+- `research-map.md` — authoritative research space map; read before every Map stage
+
 ## Core Operations
 
 ### Ingest
@@ -24,7 +29,13 @@ Run the approved pipeline in order:
 - Extract title, authors, venue, year, problem statement, proposed method, key results, and author-stated limitations.
 
 #### Appreciate
-- Answer: what is the core innovation, what is the actual advance over prior work, what is most worth learning from, which experiment is most elegant, and what transfers to other problems.
+Answer each question explicitly:
+1. What is the core innovation? (Strip the marketing language — what actually changed?)
+2. What is the real advance over prior work?
+3. Which single design is most worth learning from?
+4. Which experiment is most elegant?
+5. Which framing, task definition, or evaluation approach is most inspiring?
+6. What is transferable to other problems?
 
 #### Map
 - Read `research-map.md` first.
@@ -55,7 +66,7 @@ Run the approved pipeline in order:
 
 #### Critique
 - Record assumption holes, experimental blind spots, missing baselines, overclaims, and reproducibility concerns.
-- After critique, extract `negative-assets` for designs that look reasonable but are traps.
+- After critique, extract `negative-assets` for designs that look reasonable but are traps — write each to `assets/negative-assets/`.
 
 #### Mutate
 - Generate internal variants without relying on other papers.
@@ -133,6 +144,8 @@ Check for contradictions, stale claims, orphan pages, missing cross-links, upgra
 
 Append operation summaries to `log.md` using:
 
-`## [YYYY-MM-DD] ingest | Title`
+`## [YYYY-MM-DD] <operation> | <title or summary>`
+
+Where `<operation>` is one of: `ingest`, `query`, `lint`, `bootstrap`.
 
 Put detailed audit trails in `logs/`.
