@@ -121,17 +121,18 @@ When inspecting a source folder, use these signals in priority order:
 Input:
 
 ```text
-我补充了 sources/HACRL，我想看看这个训练能不能和 PDA 结合在一起。
+我补充了 sources/hacrl，我想看看这个训练能不能和 PDA 结合在一起。
 ```
 
 Route:
 
-1. Read `sources/HACRL/` and `sources/HACRL/notes.md` if present.
-2. Check for existing HACRL coverage in `papers/`, `topics/`, `ideas/`, and `assets/`.
-3. Ingest HACRL if coverage is missing or stale.
+1. Read `sources/hacrl/` and `sources/hacrl/notes.md` if present.
+2. Check for existing `hacrl` coverage in `papers/`, `topics/`, `ideas/`, and `assets/`.
+3. Ingest `hacrl` if coverage is missing or stale.
 4. Read PDA-related structured pages or source folders.
 5. Run compose + critique + mutate centered on the combination question.
 6. Update durable outputs in `papers/`, `ideas/`, `assets/`, `reviews/`, `index.md`, and `log.md` as warranted.
+```
 ```
 
 - [ ] **Step 3: Verify the router document exists and contains the required route families**
@@ -237,7 +238,7 @@ With this exact text:
 Add this paragraph directly below the Quick Start list:
 
 ```markdown
-Natural-language requests are preferred over command-style prompts. Example: `我补充了 sources/HACRL，我想看看这个训练能不能和 PDA 结合在一起。`
+Natural-language requests are preferred over command-style prompts. Example: `我补充了 sources/hacrl，我想看看这个训练能不能和 PDA 结合在一起。`
 ```
 
 - [ ] **Step 2: Replace the command-style prompt in `docs/getting-started/first-ingest.md`**
@@ -285,8 +286,8 @@ You do not need to issue a command-style ingest prompt.
 
 Good natural-language requests:
 
-- `我补充了 sources/HACRL，先帮我整理这篇论文最值得学的地方。`
-- `我补充了 sources/HACRL，我想看看这个训练能不能和 PDA 结合在一起。`
+- `我补充了 sources/hacrl，先帮我整理这篇论文最值得学的地方。`
+- `我补充了 sources/hacrl，我想看看这个训练能不能和 PDA 结合在一起。`
 - `I added sources/hacpo. Can you see whether its reward design is reusable for my current agent idea?`
 
 The agent should inspect the referenced source folder, read `notes.md` if present, ingest missing coverage, and then continue into the research question.
@@ -294,7 +295,7 @@ The agent should inspect the referenced source folder, read `notes.md` if presen
 
 - [ ] **Step 4: Verify all onboarding docs now prefer natural-language requests**
 
-Run: `rg -n "natural-language requests are preferred|Tell your LLM agent what new material you added|Use a natural-language request like|You do not need to issue a command-style ingest prompt|sources/HACRL" /Users/chendongyao/Desktop/LLM-WIKI/README.md /Users/chendongyao/Desktop/LLM-WIKI/docs/getting-started/first-ingest.md /Users/chendongyao/Desktop/LLM-WIKI/sources/README.md`
+Run: `rg -n "natural-language requests are preferred|Tell your LLM agent what new material you added|Use a natural-language request like|You do not need to issue a command-style ingest prompt|sources/hacrl" /Users/chendongyao/Desktop/LLM-WIKI/README.md /Users/chendongyao/Desktop/LLM-WIKI/docs/getting-started/first-ingest.md /Users/chendongyao/Desktop/LLM-WIKI/sources/README.md`
 Expected: the new natural-language guidance appears in all three files.
 
 - [ ] **Step 5: Commit the onboarding updates**
@@ -333,11 +334,13 @@ Expected: no matches for the old command-style-first wording remain.
 Run: `git -C /Users/chendongyao/Desktop/LLM-WIKI diff --check -- /Users/chendongyao/Desktop/LLM-WIKI/AGENTS.md /Users/chendongyao/Desktop/LLM-WIKI/docs/workflows/router.md /Users/chendongyao/Desktop/LLM-WIKI/README.md /Users/chendongyao/Desktop/LLM-WIKI/docs/getting-started/first-ingest.md /Users/chendongyao/Desktop/LLM-WIKI/sources/README.md`
 Expected: no whitespace or patch-format errors.
 
-- [ ] **Step 5: Commit the verified integration state**
+- [ ] **Step 5: Commit only if verification required fixes**
 
 ```bash
-git -C /Users/chendongyao/Desktop/LLM-WIKI add /Users/chendongyao/Desktop/LLM-WIKI/AGENTS.md /Users/chendongyao/Desktop/LLM-WIKI/docs/workflows/router.md /Users/chendongyao/Desktop/LLM-WIKI/README.md /Users/chendongyao/Desktop/LLM-WIKI/docs/getting-started/first-ingest.md /Users/chendongyao/Desktop/LLM-WIKI/sources/README.md
-git -C /Users/chendongyao/Desktop/LLM-WIKI commit -m "docs: wire semantic intent routing across repository guides"
+git -C /Users/chendongyao/Desktop/LLM-WIKI diff --quiet -- /Users/chendongyao/Desktop/LLM-WIKI/AGENTS.md /Users/chendongyao/Desktop/LLM-WIKI/docs/workflows/router.md /Users/chendongyao/Desktop/LLM-WIKI/README.md /Users/chendongyao/Desktop/LLM-WIKI/docs/getting-started/first-ingest.md /Users/chendongyao/Desktop/LLM-WIKI/sources/README.md || (
+  git -C /Users/chendongyao/Desktop/LLM-WIKI add /Users/chendongyao/Desktop/LLM-WIKI/AGENTS.md /Users/chendongyao/Desktop/LLM-WIKI/docs/workflows/router.md /Users/chendongyao/Desktop/LLM-WIKI/README.md /Users/chendongyao/Desktop/LLM-WIKI/docs/getting-started/first-ingest.md /Users/chendongyao/Desktop/LLM-WIKI/sources/README.md &&
+  git -C /Users/chendongyao/Desktop/LLM-WIKI commit -m "docs: wire semantic intent routing across repository guides"
+)
 ```
 
 ---
