@@ -49,7 +49,7 @@ When a user message mentions one or more `sources/...` folders and also expresse
 
 1. Identify the referenced source folders.
 2. Determine whether each folder already has adequate structured coverage in `papers/`, `topics/`, `ideas/`, and `assets/`.
-3. If coverage is missing or stale, silently run full ingest first.
+3. If coverage is missing or stale, run full ingest without pausing for a separate confirmation step.
 4. Continue into the requested analysis without pausing for a separate ingest confirmation step.
 5. Write back durable outputs when the result is wiki-worthy.
 
@@ -91,11 +91,14 @@ The router should consider:
 
 - explicit `sources/<slug>` mentions
 - file-path mentions that imply new source material
+- `notes.md` in the source folder, when present, as an explicit intent layer that may override or refine the chat-message signal
 - verbs such as “补充了”, “加了”, “放进去了”, “新加入”
 - research-intent verbs such as “结合”, “对比”, “借鉴”, “复刻”, “迁移”, “支持”, “质疑”
 - existing wiki coverage
 
 The router must not require exact phrase equality. It should infer intent from nearby semantics and repository state.
+
+`docs/workflows/router.md` should include both Chinese and English trigger expressions, because the surrounding user language may vary across sessions.
 
 If the message is ambiguous but still contains a clear new source folder, default to ingest-first.
 
