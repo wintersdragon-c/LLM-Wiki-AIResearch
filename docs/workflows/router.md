@@ -87,7 +87,7 @@ When inspecting a source folder, use these signals in priority order:
 3. chat-message intent
 4. current wiki coverage
 
-notes.md may refine or override the chat-message signal when the note is more specific.
+`notes.md` may refine or override the chat-message signal when the note is more specific.
 
 ## Example
 
