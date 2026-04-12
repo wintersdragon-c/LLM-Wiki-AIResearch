@@ -12,6 +12,10 @@ updated: 2026-04-11
 ## [2026-04-11] bootstrap | Initialized research wiki structure
 - Created the repository skeleton from the approved design spec.
 
+## [2026-04-11] dry-run | Verified synthetic paper-to-idea link path
+- Added `example-paper` and `h-example-idea` to validate link and frontmatter conventions.
+- Fixtures removed after verification; log entry retained as audit record.
+
 ## [2026-04-11] lint | Obsidian CLI operationalization pass
 - Formalized slug/naming rules per directory in AGENTS.md.
 - Strengthened frontmatter schema: universal title/slug/created fields; type-specific paper_id, topic_refs, asset_kind, source_papers.

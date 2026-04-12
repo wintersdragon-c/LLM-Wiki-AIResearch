@@ -326,8 +326,8 @@ Expected: both Chinese and English route examples appear across the router and o
 
 - [ ] **Step 3: Verify no onboarding doc still prefers command-style ingest as the primary workflow**
 
-Run: `rg -n "Ask your LLM agent to `ingest`|Ingest the source folder at|command-style ingest prompt" /Users/chendongyao/Desktop/LLM-WIKI/README.md /Users/chendongyao/Desktop/LLM-WIKI/docs/getting-started/first-ingest.md /Users/chendongyao/Desktop/LLM-WIKI/sources/README.md || true`
-Expected: no matches for the old command-style-first wording remain.
+Run: `rg -n "Ask your LLM agent to .ingest.|Ingest the source folder at" /Users/chendongyao/Desktop/LLM-WIKI/README.md /Users/chendongyao/Desktop/LLM-WIKI/docs/getting-started/first-ingest.md /Users/chendongyao/Desktop/LLM-WIKI/sources/README.md || true`
+Expected: no matches for the old command-style-first wording remain. (Note: the phrase "command-style ingest prompt" intentionally appears in sources/README.md as a negation and is not a false positive — exclude it from this check.)
 
 - [ ] **Step 4: Run a markdown integrity check on the touched files**
 
