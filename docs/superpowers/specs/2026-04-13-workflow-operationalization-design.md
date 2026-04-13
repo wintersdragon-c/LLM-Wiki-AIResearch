@@ -44,6 +44,9 @@ Phase 1 includes:
   - `assets/negative-assets/`
   - `reviews/`
   - `logs/`
+- The `topics/` resolver must explicitly distinguish topic map pages from survey subpages:
+  - `topics/<topic>.md` is the default map page for a research direction.
+  - `topics/<topic>/<subtopic>.md` is a survey subpage created only after the topic has 5+ papers or a clear route divergence.
 - Update hypothesis and proposal templates to support a current-judgment plus evidence-timeline pattern.
 - Add a doctor workflow that specifies deterministic checks, but do not implement a full CLI script in Phase 1.
 
@@ -121,7 +124,7 @@ Purpose: Periodic wiki consolidation and re-review.
 Must include:
 
 - Research equivalent of GBrain's dream cycle:
-  - source sweep
+  - source sweep: scan `sources/` for source folders that have no corresponding structured coverage in `papers/`, `topics/`, `ideas/`, or `assets/`, then report them as ingest candidates rather than modifying them directly
   - citation/source audit
   - idea re-review
   - research-map drift check
@@ -146,6 +149,11 @@ Must include:
 - Broken WikiLink or citation-like bracket detection where feasible.
 - `sources/` folders with no structured coverage.
 - Dry-run/fix separation: only trivial artifacts such as LLM preambles and wrapping code fences are auto-fix candidates.
+- Reporting format:
+  - Print or write a grouped report with `error`, `warning`, and `info` severities.
+  - For each issue, include file path, rule id, short message, fixability, and recommended next action.
+  - When the doctor workflow is run during a substantial maintenance session, write the detailed audit to `logs/<YYYY-MM-DD>-doctor-audit.md`.
+  - Append to `log.md` only if the doctor run changes wiki content or produces a durable maintenance decision; read-only checks should stay in `logs/` only.
 
 ## Directory Resolver Format
 
@@ -220,6 +228,8 @@ After several real ingests validate the workflow docs, add optional agent-specif
 - `.agents/skills/llm-wiki-maintain/SKILL.md`
 - `.agents/skills/llm-wiki-doctor/SKILL.md`
 
+The `.agents/skills/` path is chosen for compatibility with agent skill discovery conventions used by Codex/Claude Code-style tooling. Phase 1 does not create this directory; the repository workflow documents remain authoritative until optional real skills are introduced.
+
 Each real skill should contain:
 
 - A short trigger description.
@@ -233,7 +243,7 @@ This preserves portability: the repository works without installed skills, but a
 The operationalization pass is successful when:
 
 - A new LLM session can ingest a source by reading `AGENTS.md`, `router.md`, `ingest.md`, and target directory README files without returning to the original long spec.
-- `AGENTS.md` is shorter and points to workflow documents for procedure details.
+- `AGENTS.md` is shorter and points to workflow documents for procedure details. The implementation target is at least a 40% line-count reduction from the current 296-line file, with a target of 180 lines or fewer.
 - Each key directory README can answer "does this page belong here or somewhere else?"
 - Hypothesis and proposal templates support current-judgment plus evidence timeline.
 - Doctor checks are specified clearly enough to become a deterministic script later.
