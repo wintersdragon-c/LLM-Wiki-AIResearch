@@ -21,3 +21,6 @@ __pycache__/
 # Git worktrees
 .worktrees/
 
+# Raw third-party source material (large, not for version control)
+reference/raw/
+
