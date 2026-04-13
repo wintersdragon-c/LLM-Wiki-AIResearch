@@ -1,45 +1,45 @@
-# Source Folders
+# Directory Purpose
 
-Use `sources/` as the low-friction intake layer.
+Use `sources/` as the low-friction intake layer for user-owned source folders.
 
-Recommended pattern:
+## What Goes Here
+
+- One folder per source bundle, paper family, or research material bundle.
+- Raw PDFs, markdown exports, screenshots, figures, copied notes, code snapshots, datasets, and repo snapshots.
+- Optional `notes.md` describing why the material matters and what the user wants from ingest.
+
+## What Does Not Go Here
+
+- Structured paper pages. Put those in `papers/`.
+- Topic maps or surveys. Put those in `topics/`.
+- Hypothesis or proposal pages. Put those in `ideas/`.
+- Reusable extracted mechanisms or experiment patterns. Put those in `assets/`.
+
+## Neighboring Directories To Check
+
+- `papers/` after a source is ingested into a canonical paper page.
+- `assets/` after reusable mechanisms or patterns are extracted.
+- `ideas/` after Mutate or Compose creates research ideas.
+- `reviews/` when a durable synthesis is created from multiple materials.
+
+## Required Frontmatter
+
+No frontmatter is required inside `sources/`. Source folders are user-owned intake material.
+
+## Naming Pattern
+
+Use kebab-case folder names: `sources/hacrl/`, `sources/lambdarank-grpo/`.
+
+## Good Example
 
 ```text
-sources/
-  hacpo/
-    notes.md
-    paper.pdf
-    repo/
-    figures/
+sources/hacrl/
+  notes.md
+  paper.pdf
+  repo/
+  figures/
 ```
 
-Rules:
+## Common Wrong Placement
 
-- Create one folder per source bundle or paper family.
-- Put any relevant material inside: PDFs, markdown exports, screenshots, code snapshots, datasets, links saved as text, or copied notes.
-- `notes.md` is the only recommended human-written file. Keep it short.
-- Do not try to pre-structure the wiki here. The LLM should compile structured pages into `papers/`, `topics/`, `ideas/`, and `assets/`.
-
-Minimal `notes.md` example:
-
-```md
-# Notes
-
-- Why this matters: on-policy RL for long-horizon agents
-- What I want: extract core mechanism, critique evaluation, propose follow-up ideas
-- Related topic: [[topics/agent-systems]]
-```
-
-If you want a blank starting point, copy `sources/_template/notes.md`.
-
-## How To Ask The Agent
-
-You do not need to issue a command-style ingest prompt.
-
-Good natural-language requests:
-
-- `我补充了 sources/hacrl，先帮我整理这篇论文最值得学的地方。`
-- `我补充了 sources/hacrl，我想看看这个训练能不能和 PDA 结合在一起。`
-- `I added sources/hacpo. Can you see whether its reward design is reusable for my current agent idea?`
-
-The agent should inspect the referenced source folder, read `notes.md` if present, ingest missing coverage, and then continue into the research question.
+Do not write `sources/hacrl/paper-summary.md` as a compiled wiki page. Create the compiled page under `papers/` after ingest.
