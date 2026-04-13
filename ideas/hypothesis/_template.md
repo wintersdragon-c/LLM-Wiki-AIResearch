@@ -13,23 +13,29 @@ updated: YYYY-MM-DD
 
 # Hypothesis Title
 
-## Question
+## Current Claim
 
 One-sentence research question or hypothesis.
 
 ## Source Mechanisms
 
 <!-- Anchor to the closest stable section heading in the paper page.
-     Paper pages use section headings: #appreciate, #abstract, #critique, #mutate, #compose
+     Paper pages use section headings: #appreciate, #abstract, #critique, #mutate, #compose.
      Example: [[papers/some-paper]]#appreciate
      Mechanism-level anchors do not exist in paper pages — link to the section, not a sub-item. -->
 - [[papers/example-paper]]#appreciate
 
-## Feasibility
+## Feasibility Judgment
 
-Short note on why this may be worth testing.
+Short note on why this may be worth testing and what evidence is still missing.
 
-## Next Check
+## Minimal Test
 
-- What evidence is missing?
-- What would trigger proposal promotion?
+- Smallest experiment or analysis that would make the hypothesis more or less credible.
+- What result would trigger proposal promotion?
+
+---
+
+## Evidence Timeline
+
+- YYYY-MM-DD | Created from Mutate or Compose. Source: [[papers/example-paper]]

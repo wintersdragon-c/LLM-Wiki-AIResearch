@@ -14,14 +14,39 @@ updated: YYYY-MM-DD
 
 # Proposal Title
 
+## Current Proposal
+
+One-paragraph current version of the research proposal.
+
 ## Motivation
+
+Why this is worth doing now.
 
 ## Core Mechanism
 
-## Risk / Assumption Holes
+What mechanism or design change the proposal relies on.
 
 ## Minimal Experiment
 
-## Positioning In Research Space
+The smallest experiment that can test the core assumption.
 
-## Related Ideas
+## Risks And Assumption Holes
+
+- Main assumption that could fail.
+- Missing baseline or evaluation risk.
+- Reproducibility concern.
+
+## Positioning
+
+How this fits the research space: `opens-direction`, `fills-gap`, `overturns-assumption`, or `engineering-reinforcement`.
+
+## Relationship To Existing Ideas
+
+- Related hypothesis or proposal links.
+- Whether this supersedes, combines, or conflicts with another idea.
+
+---
+
+## Evidence Timeline
+
+- YYYY-MM-DD | Promoted from hypothesis after at least two independent sources and a minimal experiment were identified.
