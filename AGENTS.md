@@ -2,22 +2,31 @@
 
 ## What This Repository Is
 
-This repository is an LLM-maintained research wiki for computer science work. The repository is a persistent, compounding markdown knowledge base rather than an application codebase.
+This repository is an LLM-maintained research wiki for computer science work. It is a persistent markdown knowledge base, not an application codebase.
 
-Read `LLM-wiki.md` for the pointer to the original Karpathy gist, then read `docs/superpowers/specs/2026-04-10-research-wiki-design.md` and `research-map.md` before making structural edits.
+Read `LLM-wiki.md` for the pointer to the original Karpathy gist, then read `research-map.md`, `index.md`, and the relevant workflow document before making structural wiki edits.
 
 ## Architecture
 
-Three layers:
-
 - `sources/` contains user-owned source folders. Read from it during ingest; do not treat it as compiled wiki output.
 - Root-level wiki directories (`topics/`, `papers/`, `ideas/`, `assets/`, `reviews/`, `logs/`) contain LLM-maintained markdown pages.
-- Schema files (`AGENTS.md`, `CLAUDE.md`) define workflows and conventions.
+- `docs/workflows/` contains repository-owned, skill-shaped workflows. These are the authoritative procedure documents for ingest, query, maintain, and doctor operations.
+- `AGENTS.md` is the root router and hard-constraint document, not the place for full procedure bodies.
 
 Root-level special files:
-- `index.md` — content catalog; read before every Query
-- `log.md` — append-only global timeline; append after every operation
-- `research-map.md` — authoritative research space map; read before every Map stage
+
+- `index.md` — content catalog; read before every Query.
+- `log.md` — append-only global timeline; append after every content-changing operation.
+- `research-map.md` — authoritative research space map; read before every Map stage.
+
+## Required Read Order
+
+- For natural-language routing: read `docs/workflows/router.md`.
+- For source ingest: read `docs/workflows/ingest.md`.
+- For research questions over existing wiki content: read `docs/workflows/query.md`.
+- For consolidation and re-review: read `docs/workflows/maintain.md`.
+- For validation and lint-style checks: read `docs/workflows/doctor.md`.
+- Before creating or moving pages: read the target directory `README.md` resolver.
 
 ## File Naming
 
@@ -38,211 +47,58 @@ All file names must be kebab-case slugs. No spaces, no uppercase, no underscores
 | `reviews/` | `<slug>.md` | `process-supervision-survey.md` |
 | `logs/` | `<YYYY-MM-DD>-<slug>.md` | `2026-04-11-ingest-audit.md` |
 
-The `paper_id` field in paper frontmatter must match the file slug exactly (without `.md`).
+The `paper_id` field in paper frontmatter must match the file slug exactly.
 
-## Core Operations
+## Source Intake
 
-### Source Intake
 Use `sources/<slug>/` as the intake unit.
 
-- A source folder may contain any mix of files: `paper.pdf`, `notes.md`, `repo/`, `figures/`, copied markdown, screenshots, or other supporting artifacts.
-- `notes.md` is recommended but optional. Treat it as the user's intent layer: why the material matters, what to extract, what to critique, and any early ideas.
+- A source folder may contain any mix of files: `paper.pdf`, `notes.md`, `repo/`, `figures/`, copied markdown, screenshots, or supporting artifacts.
+- `notes.md` is recommended but optional. Treat it as the user's intent layer.
 - Never require the user to pre-fill multiple metadata files before ingest.
 - Do not create compiled wiki pages inside `sources/`.
 
-### Intent Routing
+## Intent Routing
+
 Interpret user requests by research intent, not only by explicit workflow verbs.
 
-- If a user mentions one or more `sources/...` folders and also asks an analytic question, first check whether those sources already have adequate structured coverage in `papers/`, `topics/`, `ideas/`, and `assets/`.
+- If the user mentions `sources/...` and asks an analytic question, check existing coverage in `papers/`, `topics/`, `ideas/`, and `assets/`.
 - If coverage is missing or stale, run full ingest without pausing for a separate confirmation step, then continue into the requested analysis.
-- Read `notes.md` inside a referenced source folder when present. Treat it as an explicit intent layer that may refine or override the chat-message signal.
-- Use semantic routing rather than exact-string matching. Route from path mentions, surrounding verbs, and current repository state together.
-- Support both Chinese and English trigger language when mapping requests to routes.
-- Reuse existing structured pages when coverage is already sufficient; avoid redundant ingest.
-- Ask a clarifying question only when the referenced path does not exist, multiple candidate targets conflict materially, or the requested analysis target is too ambiguous to resolve from repository context.
-- Use `docs/workflows/router.md` as the concrete route map for intent families and default action sequences.
-
-### Ingest
-Run the approved pipeline in order:
-`Parse -> Appreciate -> Map -> Positioning -> Diff -> Abstract -> Critique -> Mutate -> Compose -> Update -> Log`
-
-#### Parse
-- Extract title, authors, venue, year, problem statement, proposed method, key results, and author-stated limitations.
-
-#### Appreciate
-Answer each question explicitly:
-1. What is the core innovation? (Strip the marketing language — what actually changed?)
-2. What is the real advance over prior work?
-3. Which single design is most worth learning from?
-4. Which experiment is most elegant?
-5. Which framing, task definition, or evaluation approach is most inspiring?
-6. What is transferable to other problems?
-
-#### Map
-- Read `research-map.md` first.
-- Identify which topic map pages and survey subpages this paper belongs to.
-
-#### Positioning
-- Classify the paper as exactly one primary role:
-  - `opens-direction`
-  - `fills-gap`
-  - `overturns-assumption`
-  - `engineering-reinforcement`
-- Apply the matching update target:
-  - `opens-direction` updates `research-map.md` and may create a new topic page
-  - `fills-gap` updates an existing topic page or known-gap section
-  - `overturns-assumption` triggers idea re-review and critique updates
-  - `engineering-reinforcement` updates experiment-pattern and method-route pages
-
-#### Diff
-- Record contradictions, reinforcements, newly tracked variables, and superseded claims relative to the current wiki.
-
-#### Abstract
-- Immediately extract these reusable assets when present:
-  - mechanisms
-  - experiment patterns
-  - evaluation patterns
-  - failure modes
-  - transferable objectives, biases, and data tricks
-
-#### Critique
-- Record assumption holes, experimental blind spots, missing baselines, overclaims, and reproducibility concerns.
-- After critique, extract `negative-assets` for designs that look reasonable but are traps — write each to `assets/negative-assets/`.
-
-#### Mutate
-- Generate internal variants without relying on other papers.
-- Convert promising variants into `ideas/hypothesis/` cards.
-
-#### Compose
-- Always run.
-- In weak-compose mode (`<10` papers), create low-confidence combinations and mark hypothesis cards with `confidence: low`.
-- In strong-compose mode (`>=10` papers), generate full cross-paper combinations with normal confidence.
-
-#### Update
-- Update all affected pages.
-- Maintain bidirectional links between `papers/` and `ideas/`.
-- Check whether any hypothesis should be promoted to proposal.
-- Add or refresh entries in `index.md` for every new or significantly changed page.
-
-#### Log
-- Append a summary to `log.md`.
-- Write detailed audit records to `logs/` when the session is substantial.
-
-### Query
-Route natural-language research requests using `docs/workflows/router.md`.
-Read `research-map.md` and `index.md` first, then relevant topic, paper, idea, and asset pages. File valuable outputs back into the wiki.
-If the request references new `sources/...` material, perform the coverage check and ingest-first behavior from `Intent Routing` before answering.
-
-### Lint
-Check for contradictions, stale claims, orphan pages, missing cross-links, upgradeable hypotheses, stale `under-review` ideas, and `research-map.md` drift.
+- Read `notes.md` inside a referenced source folder when present.
+- Use semantic routing across Chinese and English requests.
+- Reuse existing structured pages when coverage is already sufficient.
+- Ask a clarifying question only when the referenced path does not exist, multiple targets conflict materially, or the analysis target is too ambiguous to resolve from repository context.
+- Use `docs/workflows/router.md` as the concrete route map.
 
 ## Page Conventions
 
-- Use `[[WikiLink]]` syntax for all internal references.
+- Use `[[WikiLink]]` syntax for internal references.
 - Every non-guide wiki page must have YAML frontmatter with at minimum: `type`, `title`, `slug`, `tags`, `created`, `updated`.
 - Schema files (`AGENTS.md`, `CLAUDE.md`), reference documents (`LLM-wiki.md`), `docs/` planning artifacts, and directory guide files (`README.md`) are exempt from the universal schema.
-- `hypothesis` pages also require `status`, `confidence`, `topic_refs`, `source_papers`.
-- `proposal` pages also require `status`, `confidence`, `positioning`, `topic_refs`, `source_papers`.
-- `paper` pages also require `paper_id`, `topic_refs`, `inspired_ideas`.
-- `asset` pages also require `asset_kind`, `source_papers`.
-
-## Frontmatter Schema
-
-### Universal (all pages)
-
-```yaml
-type: <page-type>
-title: "Human-readable title"
-slug: <file-slug-without-extension>
-tags: [<tag>, ...]
-created: YYYY-MM-DD
-updated: YYYY-MM-DD
-```
-
-### paper
-
-```yaml
-paper_id: <firstauthor>-<year>-<keyword>   # must match file slug
-topic_refs: ["[[topics/slug]]", ...]
-inspired_ideas: []
-```
-
-### hypothesis
-
-```yaml
-status: hypothesis                          # or under-review
-confidence: low                             # low | medium | high
-topic_refs: ["[[topics/slug]]", ...]
-source_papers: ["[[papers/slug]]", ...]
-```
-
-### proposal
-
-```yaml
-status: proposal                            # or under-review
-confidence: medium                          # low | medium | high
-positioning: fills-gap                      # opens-direction | fills-gap | overturns-assumption | engineering-reinforcement
-topic_refs: ["[[topics/slug]]", ...]
-source_papers: ["[[papers/slug]]", ...]
-```
-
-### topic / topic-survey
-
-```yaml
-subtopics: ["[[topics/slug/subtopic]]", ...]
-papers: []
-ideas: []
-open_questions: []
-```
-
-### asset (mechanism, experiment-pattern, evaluation-pattern, failure-mode, negative-asset)
-
-```yaml
-asset_kind: mechanism                       # matches type value
-source_papers: ["[[papers/slug]]", ...]
-```
+- `hypothesis` pages also require `status`, `confidence`, `topic_refs`, and `source_papers`.
+- `proposal` pages also require `status`, `confidence`, `positioning`, `topic_refs`, and `source_papers`.
+- `paper` pages also require `paper_id`, `topic_refs`, and `inspired_ideas`.
+- `asset` pages also require `asset_kind` and `source_papers`.
 
 ## Idea Lifecycle
 
-### Hypothesis Cards
-- Created automatically during `Mutate` or `Compose`.
-- Must include a one-sentence question, source links, a feasibility note, and `confidence`.
-
-### Proposal Promotion
-- Promote a hypothesis to `ideas/proposals/` only when:
-  - at least two independent sources support the core assumption
-  - a minimal experiment can be sketched
-
-### Decay And Re-Review
+- Create hypothesis cards during `Mutate` or `Compose`.
+- Promote a hypothesis to proposal only when at least two independent sources support the core assumption and a minimal experiment can be sketched.
 - If a paper is positioned as `overturns-assumption`, mark affected hypotheses or proposals as `under-review` until resolved.
+- For evolving idea pages, rewrite current-judgment sections and append evidence below `## Evidence Timeline`.
 
 ## Bidirectional Tracking
 
 - Each relevant `papers/*.md` page maintains `inspired_ideas:`.
-- Each idea page maintains `source_papers:` in frontmatter for page-level provenance.
-- If finer provenance matters, record section- or anchor-level evidence in the body under a source section such as `## Source Mechanisms`.
-- Keep both directions consistent during every `Update`.
+- Each idea page maintains `source_papers:`.
+- If finer provenance matters, record section-level evidence in the body under `## Source Mechanisms` or `## Evidence Timeline`.
+- Keep both directions consistent during every Update.
 
 ## Topic Pages
 
-### Topic Map Pages
 - Default topic pages live at `topics/<topic-name>.md`.
-- Required structure: definition, core sub-problems, current judgment, known gaps.
-
-### Survey Subpages
-- Create `topics/<topic-name>/<subtopic>.md` only when a topic accumulates 5+ papers or route divergence appears.
-- Required structure: route evolution, representative works, strongest hypothesis, counterexamples, open problems.
-
-## Directory Guide
-
-- `sources/`: low-friction source folders owned by the user; recommended input entrypoint
-- `topics/`: topic map pages and survey subpages
-- `papers/`: one structured page per paper
-- `ideas/hypothesis/`: fast-capture idea cards
-- `ideas/proposals/`: mature ideas with minimal experiment plans
-- `assets/`: reusable mechanisms, experiment patterns, evaluation patterns, failure modes, and negative assets
-- `reviews/`: research-content syntheses
-- `logs/`: operation-process records
+- Topic map pages define the direction, core sub-problems, current judgment, and known gaps.
+- Create `topics/<topic-name>/<subtopic>.md` only when a topic accumulates 5+ papers or clear route divergence appears.
 
 ## Logging
 
@@ -252,45 +108,14 @@ Append operation summaries to `log.md` using:
 
 Where `<operation>` is one of: `ingest`, `query`, `lint`, `bootstrap`, `dry-run`.
 
-Put detailed audit trails in `logs/`.
+Write detailed audit records to `logs/`. Read-only intermediate checks should stay in `logs/` only and should not create a `log.md` entry unless they change wiki content or produce a durable maintenance decision.
 
-### Log Routing
+## Action To Workflow Map
 
-Write to `log.md` (global timeline) for:
-- Every `ingest`
-- Every `query` that writes new pages back to the wiki
-- Every `lint`
-- Every `proposal` promotion
-
-Write to `logs/` only (no `log.md` entry) for:
-- Intermediate checks and temporary audits
-- Batch link-repair details
-- Any operation that does not change wiki content
-
-`dry-run` operations must use the `dry-run` operation type in `log.md` to distinguish test runs from real ingests:
-```
-## [YYYY-MM-DD] dry-run | <title>
-```
-
-## Action → Template Map
-
-| Action | Template | Required frontmatter fields |
-|--------|----------|-----------------------------|
-| `source-folder-init` | `sources/_template/notes.md` | — |
-| `new-topic` | `topics/_template.md` | `title`, `slug`, `subtopics`, `open_questions`, `papers`, `ideas` |
-| `new-topic-survey` | `topics/_survey-template.md` | `title`, `slug`, `tags`, `created`, `updated` |
-| `new-paper` | `papers/_template.md` | `paper_id`, `title`, `slug`, `topic_refs` |
-| `new-hypothesis` | `ideas/hypothesis/_template.md` | `title`, `slug`, `status`, `confidence`, `topic_refs`, `source_papers` |
-| `promote-proposal` | `ideas/proposals/_template.md` | `title`, `slug`, `status`, `confidence`, `positioning`, `topic_refs`, `source_papers` |
-| `new-mechanism` | `assets/mechanisms/_template.md` | `title`, `slug`, `asset_kind`, `source_papers` |
-| `new-experiment-pattern` | `assets/experiment-patterns/_template.md` | `title`, `slug`, `asset_kind`, `source_papers` |
-| `new-evaluation-pattern` | `assets/evaluation-patterns/_template.md` | `title`, `slug`, `asset_kind`, `source_papers` |
-| `new-failure-mode` | `assets/failure-modes/_template.md` | `title`, `slug`, `asset_kind`, `source_papers` |
-| `new-negative-asset` | `assets/negative-assets/_template.md` | `title`, `slug`, `asset_kind`, `source_papers` |
-| `new-lint-report` | `logs/lint-template.md` | — |
-
-## Operational Helpers
-
-- `reviews/ingest-checklist.md` is the canonical ingest checklist.
-- `logs/lint-template.md` is the starting point for lint reports.
-- `docs/workflows/router.md` is the concrete semantic route map for natural-language user requests.
+| Action | Workflow |
+|--------|----------|
+| natural-language route | `docs/workflows/router.md` |
+| source ingest | `docs/workflows/ingest.md` |
+| research query | `docs/workflows/query.md` |
+| consolidation / re-review | `docs/workflows/maintain.md` |
+| validation / lint / doctor | `docs/workflows/doctor.md` |
